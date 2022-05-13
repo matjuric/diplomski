@@ -1,3 +1,8 @@
+# pokrece se sa
+# python timeliner.py ../../../Podaci/ScenarioReview.xlsx
+# napravi ljepsi poziv skripte
+
+
 from cProfile import label
 import sys
 import pandas as pd
