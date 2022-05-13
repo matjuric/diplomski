@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Home page</title>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'sustav/style.css' %}">
+    <div class="topnav" style="text-align: center;">
+        <a class="button" href="/">Home</a>
+        <a class="button" href="/info">Info</a>
+    </div> 
+    {% if all_incidents %}
+        <ul>
+        {% for incident in all_incidents %}
+            <li>{{ incident }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No incidents have occured.</p>
+    {% endif %}
+</body>
+</html>
