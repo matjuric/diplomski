@@ -5,5 +5,11 @@
 {% endblock %}
 
 {% block content %}
-    <p>Home page</p>
+    {% if all_incidents %}
+        {% for incident in all_incidents %}
+            <ul>
+                <li>{{ incident }}</li>
+            </ul>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

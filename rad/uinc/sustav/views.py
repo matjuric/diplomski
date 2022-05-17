@@ -8,10 +8,9 @@ from .models import Incident
 def home(request):
     incidents = Incident.objects.all()
     context = {'all_incidents': incidents}
-    # print('tu sam')
     return render(request, 'home.html', context)
 
-def info(request):
+def statistics(request):
     number_of_incidents = Incident.objects.count()
     context = {'number_of_incidents': number_of_incidents}
-    return render(request, 'info.html', context)
+    return render(request, 'statistics.html', context)
