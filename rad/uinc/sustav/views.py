@@ -9,7 +9,7 @@ def home(request):
     incidents = Incident.objects.all()
     context = {'all_incidents': incidents}
     # print('tu sam')
-    return render(request, 'index.html', context)
+    return render(request, 'home.html', context)
 
 def info(request):
     number_of_incidents = Incident.objects.count()
