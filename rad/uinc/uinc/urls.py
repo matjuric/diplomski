@@ -17,7 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 
+from sustav.views import IncidentCreateView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('sustav.urls')),
+    path('sustav/', include('sustav.urls')),
 ]

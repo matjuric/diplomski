@@ -8,11 +8,25 @@
     <!-- {% load static %} -->
     <link rel="stylesheet" type="text/css" href="{% static 'sustav/style.css' %}">
     <div class="topnav" style="text-align: center;">
-        <a class="button" href="/">Home</a>
-        <a class="button" href="/statistics">Statistics</a>
+        <a class="btn btn-primary btn-sm" href="/sustav/home">Home</a>
+        <a class="btn btn-primary btn-sm" href="/sustav/statistics/">Statistics</a>
+        <a class="btn btn-primary btn-sm" href="/sustav/create_new/">Add new</a>
     </div>
 
-    {% block content %}
-    {% endblock %}
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-8">
+          <h1 class="mt-2">Django People</h1>
+          <hr class="mt-0 mb-4">
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+
+    {% comment %} {% block content %}
+    {% endblock %} {% endcomment %}
 </body>
 </html>
