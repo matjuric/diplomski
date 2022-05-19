@@ -5,20 +5,24 @@
   <title>UINC - {% block title %}{% endblock %}</title>
 </head>
 <body>
-    <!-- {% load static %} -->
-    <link rel="stylesheet" type="text/css" href="{% static 'sustav/style.css' %}">
-    <div class="topnav" style="text-align: center;">
-        <a class="btn btn-primary btn-sm" href="/sustav/home">Home</a>
-        <a class="btn btn-primary btn-sm" href="/sustav/statistics/">Statistics</a>
-        <a class="btn btn-primary btn-sm" href="/sustav/create_new/">Add new</a>
-    </div>
-
+  <!-- {% load static %} -->
     {% load bootstrap4 %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">UINC</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        {% block nav_bar_curr_active %}
+        {% endblock %}
+      </div>
+    </nav>
+
     {% bootstrap_css %}
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-8">
-          <h1 class="mt-2">Django People</h1>
+          <h1 class="mt-2">SUSTAV</h1>
           <hr class="mt-0 mb-4">
           {% block content %}
           {% endblock %}

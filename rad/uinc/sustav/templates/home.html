@@ -4,6 +4,14 @@
     Home page
 {% endblock %}
 
+{% block nav_bar_curr_active %}
+    <div class="navbar-nav">
+        <a class="nav-link active" href="/sustav/home/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/sustav/statistics/">Statistics</a>
+        <a class="nav-link" href="/sustav/create_new/">+ Add new</a>
+    </div>
+{% endblock nav_bar_curr_active %}
+
 {% block content %}
     {% if all_incidents %}
         {% for incident in all_incidents %}
