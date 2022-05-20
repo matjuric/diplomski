@@ -1,17 +1,23 @@
 {% extends "base.html" %}
 
+{% load crispy_forms_tags %}
+
 {% block nav_bar_curr_active %}
     <div class="navbar-nav">
         <a class="nav-link" href="/sustav/home/">Home <span class="sr-only">(current)</span></a>
         <a class="nav-link" href="/sustav/statistics/">Statistics</a>
-        <a class="nav-link active" href="/sustav/create_new/">+ Add new</a>
+        <a class="nav-link active" href="/sustav/add_new/">+ Add new</a>
     </div>
 {% endblock nav_bar_curr_active %}
 
+{% block header_title %}
+Adding new Incident
+{% endblock %}
+
 {% block content %}
-  <form method="post">
+  <form method="post" novalidate>
     {% csrf_token %}
-    {{ form }}
+    {{ form|crispy }}
     <button type="submit" class="btn btn-success">Save Incident</button>
   </form>
 {% endblock %}
