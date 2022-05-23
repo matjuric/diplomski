@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -18,11 +18,18 @@ def statistics(request):
     context = {'number_of_incidents': number_of_incidents}
     return render(request, 'statistics.html', context)
 
+def success(request):
+    return render(request, 'success.html')
+
+def incident_details(request):
+    return render(request, '')
+
 class IncidentCreateView(CreateView):
     model = Incident
     fields = ('name', 'spotted_by', 'date_spotted', 'severity')
+    success_url = 'success/'
 
     def form_valid(self, form) -> HttpResponse:
         form.save()
         # print(form)
-        return HttpResponse('success')
+        return super().form_valid(form)
