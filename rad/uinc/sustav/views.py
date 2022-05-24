@@ -1,7 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views import generic
+from django.views.generic import CreateView, DetailView
 from httplib2 import Http
 
 from .models import Incident
@@ -21,8 +22,8 @@ def statistics(request):
 def success(request):
     return render(request, 'success.html')
 
-def incident_details(request):
-    return render(request, '')
+class DetailView(generic.DetailView):
+    model = Incident
 
 class IncidentCreateView(CreateView):
     model = Incident

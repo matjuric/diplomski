@@ -19,8 +19,9 @@
 {% block content %}
     {% if all_incidents %}
         {% for incident in all_incidents %}
-            <ul>
-                <li>{{ incident }}</li>
+            <ul class="list-group">
+                {% comment %} <li class="list-group-item active" aria-current="true">An active item</li> {% endcomment %}
+                <a class="list-group-item-action" href="/sustav/{{ incident.pk }}">{{ incident }} </li>
             </ul>
         {% endfor %}
     {% endif %}
