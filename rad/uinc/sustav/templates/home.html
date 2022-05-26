@@ -5,11 +5,9 @@
 {% endblock %}
 
 {% block nav_bar_curr_active %}
-    <div class="navbar-nav">
-        <a class="nav-link active" href="/sustav/home/">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-link" href="/sustav/statistics/">Statistics</a>
-        <a class="nav-link" href="/sustav/add_new/">+ Add new</a>
-    </div>
+    <a class="nav-link active" href="/sustav/home/">Home <span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="/sustav/statistics/">Statistics</a>
+    <a class="nav-link" href="/sustav/add_new/">+ Add new</a>
 {% endblock nav_bar_curr_active %}
 
 {% block header_title %}
@@ -17,12 +15,14 @@
 {% endblock %}
 
 {% block content %}
-    {% if all_incidents %}
-        {% for incident in all_incidents %}
-            <ul class="list-group">
-                {% comment %} <li class="list-group-item active" aria-current="true">An active item</li> {% endcomment %}
-                <a class="list-group-item-action" href="/sustav/{{ incident.pk }}">{{ incident }} </li>
-            </ul>
-        {% endfor %}
+    {% if user.is_authenticated %}
+        {% if all_incidents %}
+            {% for incident in all_incidents %}
+                <ul class="list-group">
+                    {% comment %} <li class="list-group-item active" aria-current="true">An active item</li> {% endcomment %}
+                    <a class="list-group-item-action" href="/sustav/{{ incident.pk }}">{{ incident }} </li>
+                </ul>
+            {% endfor %}
+        {% endif %}
     {% endif %}
 {% endblock %}

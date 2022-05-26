@@ -12,16 +12,29 @@
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <a class="navbar-brand" href="/sustav/home/">UINC</a>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        {% block nav_bar_curr_active %}
-        {% endblock %}
-      </div>
+
+      {% comment %} dodati username neki negdje {% endcomment %}
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            {% if user.is_authenticated %}
+              {% block nav_bar_curr_active %}
+              {% endblock %}
+              <a class="nav-link active" href="/accounts/logout">Logout</a>
+            {% else %}
+              <a class="nav-link active" href="/accounts/login">Login</a>
+            {% endif %}
+          </div>
+        </div>
     </nav>
 
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-8">
-          <h2 class="mt-2">{% block header_title%}{% endblock %}</h1>
+          <h2 class="mt-2">
+            {% if user.is_authenticated %}
+              {% block header_title%}{% endblock %}
+            {% endif %}
+          </h2>
           <hr class="mt-0 mb-4">
           {% block content %}
           {% endblock %}

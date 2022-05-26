@@ -22,4 +22,5 @@ from sustav.views import IncidentCreateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('sustav/', include('sustav.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
