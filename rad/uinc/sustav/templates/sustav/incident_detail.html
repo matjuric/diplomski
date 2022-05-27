@@ -11,3 +11,7 @@
         <a class="nav-link active" href="/sustav/add_new/">+ Add new</a>
     </div>
 {% endblock nav_bar_curr_active %}
+
+{% block content %}
+    <a class="btn btn-danger" href="/sustav/{{ object.pk }}/delete">Delete</a>
+{% endblock %}

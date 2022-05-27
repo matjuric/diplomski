@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic.edit import DeleteView
 
 from .models import Incident
 
@@ -18,10 +19,13 @@ def success(request):
 
 class IncidentListView(ListView):
     model = Incident
-    # paginate_by: int = 5
 
 class DetailView(generic.DetailView):
     model = Incident
+
+class IncidentDeleteView(DeleteView):
+    model = Incident
+    success_url = "/sustav/home"
 
 class IncidentCreateView(CreateView):
     model = Incident
