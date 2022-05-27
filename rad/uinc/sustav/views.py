@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView, DetailView, ListView
-from django.views.generic.edit import DeleteView
+from django.views.generic.edit import DeleteView, UpdateView
 
 from .models import Incident
 
@@ -25,6 +25,14 @@ class DetailView(generic.DetailView):
 
 class IncidentDeleteView(DeleteView):
     model = Incident
+    success_url = "/sustav/home"
+
+class IncidentUpdateView(UpdateView):
+    model = Incident
+    fields = (
+        'severity',
+        'resolved',
+    )
     success_url = "/sustav/home"
 
 class IncidentCreateView(CreateView):

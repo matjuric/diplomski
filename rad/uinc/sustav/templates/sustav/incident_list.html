@@ -16,38 +16,42 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        {% for incident in object_list %}
-            <ul class="list-group">
-                {% if incident.resolved == 'Y' %}
-                    <a class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-start " href="/sustav/{{ incident.pk }}">
-                        <div>
-                            <div class="fw-bold">{{ incident }}</div>
-                            <div class="text-muted">Spotted by: {{ incident.spotted_by}}</div>
-                        </div>
-                        {% if incident.severity == 'L' %}
-                            <span class="badge badge-secondary rounded-pill">Low severity</span>
-                        {% elif incident.severity == 'M'%}
-                            <span class="badge badge-warning rounded-pill">Medium severity</span>
-                        {% else %}
-                            <span class="badge badge-danger rounded-pill">High severity!</span>
-                        {% endif %}
-                    </a>
-                {% else%}
-                    <a class="list-group-item d-flex justify-content-between align-items-start" href="/sustav/{{ incident.pk }}">
-                        <div>
-                            <div class="fw-bold">{{ incident }}</div>
-                            <div class="text-muted">Spotted by: {{ incident.spotted_by}}</div>
-                        </div>
-                        {% if incident.severity == 'L' %}
-                            <span class="badge badge-secondary rounded-pill">Low severity</span>
-                        {% elif incident.severity == 'M'%}
-                            <span class="badge badge-warning rounded-pill">Medium severity</span>
-                        {% else %}
-                            <span class="badge badge-danger rounded-pill">High severity!</span>
-                        {% endif %}
-                    </a>
-                {% endif %}
-            </ul>
-        {% endfor %}
+        <ul class="list-group">
+            {% for incident in object_list %}
+                    {% if incident.resolved == 'Y' %}
+                        <a class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-start " href="/sustav/{{ incident.pk }}">
+                            <div>
+                                <div class="fw-bold">{{ incident }}</div>
+                                <div class="text-muted">Spotted by: {{ incident.spotted_by}}</div>
+                            </div>
+                            {% if incident.severity == 'L' %}
+                                <span class="badge badge-secondary rounded-pill">Low severity</span>
+                            {% elif incident.severity == 'M'%}
+                                <span class="badge badge-warning rounded-pill">Medium severity</span>
+                            {% else %}
+                                <span class="badge badge-danger rounded-pill">High severity!</span>
+                            {% endif %}
+                        </a>
+                    {% else %}
+                        <a class="list-group-item d-flex justify-content-between align-items-start" href="/sustav/{{ incident.pk }}">
+                            <div>
+                                <div class="fw-bold">{{ incident }}</div>
+                                <div class="text-muted">Spotted by: {{ incident.spotted_by}}</div>
+                            </div>
+                            
+                            <div>
+                                {% if incident.severity == 'L' %}
+                                    <span class="badge badge-secondary rounded-pill">Low severity</span>
+                                {% elif incident.severity == 'M'%}
+                                    <span class="badge badge-warning rounded-pill">Medium severity</span>
+                                {% else %}
+                                    <span class="badge badge-danger rounded-pill">High severity!</span>
+                                {% endif %}
+                                <span class="badge badge-info rounded-pill">Open</span>
+                            </div>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+        </ul>
     {% endif %}
 {% endblock %}

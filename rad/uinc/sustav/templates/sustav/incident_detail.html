@@ -13,5 +13,6 @@
 {% endblock nav_bar_curr_active %}
 
 {% block content %}
+    <a class="btn btn-primary" href="/sustav/{{ object.pk }}/update">Update</a>
     <a class="btn btn-danger" href="/sustav/{{ object.pk }}/delete">Delete</a>
 {% endblock %}
