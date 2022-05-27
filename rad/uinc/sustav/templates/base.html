@@ -33,9 +33,9 @@
           <h2 class="mt-2">
             {% if user.is_authenticated %}
               {% block header_title%}{% endblock %}
+              <hr class="mt-0 mb-4">
             {% endif %}
           </h2>
-          <hr class="mt-0 mb-4">
           {% block content %}
           {% endblock %}
         </div>
