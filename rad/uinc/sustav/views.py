@@ -2,17 +2,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic import CreateView, DetailView
-from httplib2 import Http
+from django.views.generic import CreateView, DetailView, ListView
 
 from .models import Incident
 
 # Create your views here.
-
-def home(request):
-    incidents = Incident.objects.all()
-    context = {'all_incidents': incidents}
-    return render(request, 'home.html', context)
 
 def statistics(request):
     number_of_incidents = Incident.objects.count()
@@ -22,12 +16,15 @@ def statistics(request):
 def success(request):
     return render(request, 'success.html')
 
+class IncidentListView(ListView):
+    model = Incident
+
 class DetailView(generic.DetailView):
     model = Incident
 
 class IncidentCreateView(CreateView):
     model = Incident
-    fields = ('name', 'spotted_by', 'date_spotted', 'severity')
+    fields = ('name', 'spotted_by', 'date_spotted', 'severity', 'resolved')
     success_url = 'success/'
 
     def form_valid(self, form) -> HttpResponse:
