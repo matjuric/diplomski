@@ -18,6 +18,7 @@ def success(request):
 
 class IncidentListView(ListView):
     model = Incident
+    # paginate_by: int = 5
 
 class DetailView(generic.DetailView):
     model = Incident
@@ -29,5 +30,4 @@ class IncidentCreateView(CreateView):
 
     def form_valid(self, form) -> HttpResponse:
         form.save()
-        # print(form)
         return super().form_valid(form)

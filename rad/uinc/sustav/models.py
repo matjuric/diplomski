@@ -20,11 +20,6 @@ class Incident(models.Model):
 
     def __str__(self) -> str:
         rv = self.name + '\n'
-        rv += 'Spotted by: ' + self.spotted_by + '\n'
-        rv += str(self.date_spotted) if self.date_spotted else ''
-        rv += ' SEVERITY: ' + self.severity + '\n'
-        rv += ' RESOLVED: ' + self.resolved + '\n'
-        rv += ' private_key = \n' + str(self.pk)
         return rv
     
 
