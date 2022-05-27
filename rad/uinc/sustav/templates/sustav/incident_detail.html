@@ -15,6 +15,24 @@
 {% endblock nav_bar_curr_active %}
 
 {% block content %}
+    {% if object.has_expertise %}
+        <p>Expertise needed: </p>
+        {% for expertise in object.get_needed_expertise %}
+            <span class="badge badge-info rounded-pill">{{ expertise }}</span>
+        {% endfor %}
+    {% endif %}
+
+    <br /></br>
+    <table class="table">
+            {% for label, value in object.get_field_values %}
+                <tr>
+                    <td><p>{{ label }}<p></td>
+                    <td><p>{{ value }}</p></td>
+                </tr>
+            {% endfor %}
+
+    </table>
+
     <a class="btn btn-primary" href="/sustav/{{ object.pk }}/update">Update</a>
     {% if user|has_group:"koordinator" %}
         <a class="btn btn-danger" href="/sustav/{{ object.pk }}/delete">Delete</a>

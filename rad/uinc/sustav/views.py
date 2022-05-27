@@ -57,12 +57,14 @@ class IncidentUpdateView(UpdateView):
     fields = (
         'severity',
         'resolved',
+        'content',
+        'needed_expertise',
     )
     success_url = "/sustav/home"
 
 class IncidentCreateView(CreateView):
     model = Incident
-    fields = ('name', 'spotted_by', 'date_spotted', 'severity', 'resolved')
+    fields = ('name', 'spotted_by', 'date_spotted', 'severity', 'resolved', 'needed_expertise')
     success_url = 'success/'
 
     def form_valid(self, form) -> HttpResponse:
