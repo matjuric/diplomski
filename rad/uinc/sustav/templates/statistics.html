@@ -18,6 +18,7 @@
 {% endblock %} {% endcomment %}
 
 {% block content%}
+    <h2>Total number of recorded incidents: {{ number_of_incidents }}</h2>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     
     <h2>Severity distribution</h2>
@@ -73,4 +74,44 @@
         };
 
     </script>
+
+    <br /></br>
+    <h2>Incidents by chronological order</h2>
+    <table class="table table-bordered" style="margin-left: auto, margin-right: auto">
+        <thead>
+          <tr>
+            <th scope="col">LOW</th>
+            <th scope="col">MEDIUM</th>
+            <th scope="col">HIGH</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for incident in all_incidents %}
+                <tr>
+                    {% if incident.severity == 'L' %}
+                        <td>
+                            <a href="/sustav/{{ incident.pk }}">{{ incident }}</a>
+                        </td>
+                    {% else %}
+                    <td></td>
+                    {% endif%}
+                    {% if incident.severity == 'M' %}
+                        <td>
+                            <a href="/sustav/{{ incident.pk }}">{{ incident }}</a>
+                        </td>
+                    {% else %}
+                    <td></td>
+                    {% endif%}
+                    {% if incident.severity == 'H' %}
+                        <td>
+                            <a href="/sustav/{{ incident.pk }}">{{ incident }}</a>
+                        </td>
+                    {% else %}
+                    <td></td>
+                    {% endif%}
+                </tr>
+            {% endfor%}
+        </tbody>
+      </table>
+
 {% endblock %}

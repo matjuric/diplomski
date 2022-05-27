@@ -11,6 +11,7 @@ from .models import Incident
 
 def statistics(request):
     number_of_incidents = Incident.objects.count()
+    all_incidents = Incident.objects.all()
     labels_severity = ['LOW', 'MEDIUM', 'HIGH']
     labels_resolved = ['Resolved', 'Open']
     data_severity = [0, 0, 0]
@@ -31,6 +32,8 @@ def statistics(request):
 
     # context = {'number_of_incidents': number_of_incidents}
     return render(request, 'statistics.html', {
+        'number_of_incidents': number_of_incidents,
+        'all_incidents': all_incidents,
         'labels_severity': labels_severity,
         'labels_resolved': labels_resolved,
         'data_severity': data_severity,
