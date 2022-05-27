@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load sustav_extras %}
+
 {% block title %}
  Incident details
 {% endblock %}
@@ -14,5 +16,7 @@
 
 {% block content %}
     <a class="btn btn-primary" href="/sustav/{{ object.pk }}/update">Update</a>
-    <a class="btn btn-danger" href="/sustav/{{ object.pk }}/delete">Delete</a>
+    {% if user|has_group:"koordinator" %}
+        <a class="btn btn-danger" href="/sustav/{{ object.pk }}/delete">Delete</a>
+    {% endif %}
 {% endblock %}

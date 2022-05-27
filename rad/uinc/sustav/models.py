@@ -19,12 +19,12 @@ class Incident(models.Model):
     )
     resolved = models.CharField(max_length=1, choices=RESOLVED_OPTIONS, default='no')
 
-    # beggining = models.CharField(max_length=100, null=True)
-    # name_sender = models.CharField(max_length=100, null=True)
-    # ending_title = models.CharField(max_length=100, null=True)
-    # initiator_receiver = models.CharField(max_length=100, null=True)
-    # parameters_textmsg = models.CharField(max_length=100, null=True)
-    # content = models.TextField(max_length=300, null=True)
+    beggining = models.CharField(max_length=100, default='', null=True)
+    name_sender = models.CharField(max_length=100, default='', null=True)
+    ending_title = models.CharField(max_length=100, default='', null=True)
+    initiator_receiver = models.CharField(max_length=100, default='', null=True)
+    parameters_textmsg = models.CharField(max_length=100, default='', null=True)
+    content = models.TextField(max_length=300, default='', null=True)
 
     def __str__(self) -> str:
         rv = self.name + '\n'

@@ -30,7 +30,6 @@ def statistics(request):
         else:
             data_severity[2] += 1
 
-    # context = {'number_of_incidents': number_of_incidents}
     return render(request, 'statistics.html', {
         'number_of_incidents': number_of_incidents,
         'all_incidents': all_incidents,
