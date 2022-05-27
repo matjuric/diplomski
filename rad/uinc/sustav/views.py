@@ -11,8 +11,31 @@ from .models import Incident
 
 def statistics(request):
     number_of_incidents = Incident.objects.count()
-    context = {'number_of_incidents': number_of_incidents}
-    return render(request, 'statistics.html', context)
+    labels_severity = ['LOW', 'MEDIUM', 'HIGH']
+    labels_resolved = ['Resolved', 'Open']
+    data_severity = [0, 0, 0]
+    data_resolved = [0, 0]
+    all_incidents = Incident.objects.all()
+    for incident in all_incidents:
+        if (incident.resolved == 'Y'):
+            data_resolved[0] += 1
+        else:
+            data_resolved[1] += 1
+
+        if (incident.severity == 'L'):
+            data_severity[0] += 1
+        elif (incident.severity == 'M'):
+            data_severity[1] +=1
+        else:
+            data_severity[2] += 1
+
+    # context = {'number_of_incidents': number_of_incidents}
+    return render(request, 'statistics.html', {
+        'labels_severity': labels_severity,
+        'labels_resolved': labels_resolved,
+        'data_severity': data_severity,
+        'data_resolved': data_resolved
+    })
 
 def success(request):
     return render(request, 'success.html')
