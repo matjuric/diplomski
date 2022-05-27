@@ -19,6 +19,7 @@
             {% if user.is_authenticated %}
               {% block nav_bar_curr_active %}
               {% endblock %}
+              <a class="nav-link active">{{ user.get_username }} : {{ user.groups.all.0 }}</a>
               <a class="nav-link active" href="/accounts/logout">Logout</a>
             {% else %}
               <a class="nav-link active" href="/accounts/login">Login</a>
