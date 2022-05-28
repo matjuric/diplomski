@@ -59,12 +59,15 @@ class IncidentUpdateView(UpdateView):
         'resolved',
         'content',
         'needed_expertise',
+        'user',
     )
-    success_url = "/sustav/home"
+
+    def get_success_url(self):
+        return reverse_lazy('incident_details', kwargs={'pk': self.object.pk})
 
 class IncidentCreateView(CreateView):
     model = Incident
-    fields = ('name', 'spotted_by', 'date_spotted', 'severity', 'resolved', 'needed_expertise')
+    fields = ('name', 'spotted_by', 'user', 'date_spotted', 'severity', 'resolved', 'needed_expertise')
     success_url = 'success/'
 
     def form_valid(self, form) -> HttpResponse:

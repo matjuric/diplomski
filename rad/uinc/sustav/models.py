@@ -1,10 +1,11 @@
 from django.db import models
-from sympy import false
+from django.contrib.auth.models import *
 
 class Incident(models.Model):
     name = models.CharField('Name', max_length=100)
     spotted_by = models.CharField('Spotted by',max_length=30)
     date_spotted = models.DateTimeField('Date spotted', null=True, help_text="Expected format: <b>YYYY-MM-DD HH:MM:SS<b>", blank=True)
+    user = models.ForeignKey(User, verbose_name='Assigned to', unique=False, default='', on_delete=models.CASCADE)
 
     SEVERITIES = (
         ('L', 'low'),
@@ -36,9 +37,9 @@ class Incident(models.Model):
         return [ (field.verbose_name, field.value_from_object(self)) for field in Incident._meta.get_fields() ]
     
     def has_expertise(self):
-        if (self.needed_expertise == ''):
-            return False
-        return True
+        if (self.needed_expertise):
+            return True
+        return False
 
     def get_needed_expertise(self):
         return [ expertise for expertise in self.needed_expertise.split(',') ]

@@ -27,7 +27,11 @@
             {% for label, value in object.get_field_values %}
                 <tr>
                     <td><p>{{ label }}<p></td>
-                    <td><p>{{ value }}</p></td>
+                    {% if label == 'Assigned to' %}
+                        <td><p>{{ object.user }}</p></td>
+                    {% else %}
+                        <td><p>{{ value }}</p></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
 
