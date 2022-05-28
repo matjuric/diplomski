@@ -1,14 +1,12 @@
 # pokrece se sa
-# python timeliner.py ../../../Podaci/ScenarioReview.xlsx
-# napravi ljepsi poziv skripte
+# python timeliner.py ScenarioReview.xlsx test.csv
 
-
-from cProfile import label
 import sys
+from tracemalloc import start
 import pandas as pd
 import openpyxl
 import matplotlib.pyplot as plt
-from datetime import date
+from datetime import date, datetime
 import numpy as np
 
 def convert_xslx_to_csv(xlsx_file, csv_file):
@@ -16,7 +14,7 @@ def convert_xslx_to_csv(xlsx_file, csv_file):
     sheet = xslx_file.active
     data = sheet.rows
 
-    with open('tmp.csv', 'w+') as csv_file:
+    with open(csv_file, 'w+') as csv_file:
         for row in data:
             l = list(row)
             write_arr = []
@@ -34,16 +32,9 @@ def convert_xslx_to_csv(xlsx_file, csv_file):
             write_string += '\n'
             csv_file.write(write_string)
 
-    # ako bude nekada trebalo, moze se na neki nacin citati xlsx na pandasom, ali to mi radi bas kako zelim
-    # problem je sa \n u nekim cellovima, potrga se na tome
-    # df = pd.read_excel(xlsx_file, engine='openpyxl')
-    # print(df)
-    # # df.to_csv(csv_file)#, sep='\n')
-    # # df.replace(r'\n', ' ', regex=True)
-    # # df.to_csv(csv_file)
-
 def read_csv_file(csv_file):
-    df = pd.read_csv(csv_file)
+    parse_dates = ['Beginning']
+    df = pd.read_csv(csv_file, parse_dates=parse_dates)
     column_names = [
         'Type',
         'Beginning',
@@ -55,54 +46,38 @@ def read_csv_file(csv_file):
     ]
     
     # events
-    starting_times = df['Beginning'][:5]
-    # print(starting_times[0]); exit()
-    # print(date.fromtimestamp(starting_times[1])); exit()
-
-    # print(starting_times)
-    labels = df['Name / Sender'][:5]
+    starting_times = pd.to_datetime(df['Beginning']).apply(lambda x: x.replace(microsecond=0))
+    labels = df['Name / Sender']
     texts = df['Parameters / Text Message']
     labels = ['{0}\n{1}'.format(d, l) for l,d in zip(labels, texts)]
 
     labels = ['{0}\n{1}'.format(d, l) for l,d in zip(labels, starting_times)]
-
-    # print(labels); exit()
     
-    fig, ax = plt.subplots(figsize=(15, 4), constrained_layout=True)
-    _ = ax.set_ylim(-2, 1.75)
-    # _ = ax.set_xlim(date(2022, 3, 10), date(2022, 5, 5))
-    _ = ax.axhline(0, xmin=0.05, xmax=0.95, c='deeppink', zorder=1)
-    _ = ax.scatter(starting_times, np.zeros(len(starting_times)), s=120, c='palevioletred', zorder=2)
-    _ = ax.scatter(starting_times, np.zeros(len(starting_times)), s=30, c='darkmagenta', zorder=3)
+    fig, ax = plt.subplots(figsize=(12, 6), constrained_layout=True)
 
-    label_offsets = np.zeros(len(starting_times))
-    label_offsets[::2] = 0.35
-    label_offsets[1::2] = -0.7
-    for i, (l, d) in enumerate(zip(labels, starting_times)):
-        _ = ax.text(d, label_offsets[i], l, ha='center', fontfamily='serif', fontweight='bold', color='royalblue',fontsize=12)
+    levels = np.tile([-2.5, 2.5, -1, 1, -0.5, 0.5],
+                 int(np.ceil(len(starting_times)/6)))[:len(starting_times)]
 
-    stems = np.zeros(len(starting_times))
-    stems[::2] = 0.3
-    stems[1::2] = -0.3
-    markerline, stemline, baseline = ax.stem(starting_times, stems, use_line_collection=True)
-    _ = plt.setp(markerline, marker=',', color='darkmagenta')
-    _ = plt.setp(stemline, color='darkmagenta')
+    ax.vlines(starting_times, 0, levels, color="tab:red")
+    ax.plot(starting_times, np.zeros_like(starting_times), "-o",
+        color="k", markerfacecolor="w")
+
+    for d, l, r in zip(starting_times, levels, labels):
+        ax.annotate(r, xy=(d, l),
+                xytext=(-3, np.sign(l)*3), textcoords="offset points",
+                horizontalalignment="right",
+                verticalalignment="bottom" if l > 0 else "top")
+
 
 
     for spine in ["left", "top", "right", "bottom"]:
         _ = ax.spines[spine].set_visible(False)
     
-    _ = ax.set_xticks([])
-    _ = ax.set_yticks([])
-    
-    _ = ax.set_title('Test timeline', fontweight="bold", fontfamily='serif', fontsize=16, 
-                    color='royalblue')
+    ax.yaxis.set_visible(False)
+    ax.xaxis.set_visible(False)
 
-
-    plt.show()
-    # df = pd.read_csv(csv_file)
-    # cols = df.head()
-    # print(cols)
+    # plt.show()
+    plt.savefig('test.png')
 
 
 def main():
