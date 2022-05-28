@@ -22,7 +22,7 @@
                         <a class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-start " href="/sustav/{{ incident.pk }}">
                             <div>
                                 <div class="fw-bold">{{ incident }}</div>
-                                <div class="text-muted">Spotted by: {{ incident.spotted_by}}</div>
+                                <div class="text-muted">Spotted by: {{ incident.spotted_by}}<br /> Asigned to: {{ incident.user }}</div>
                             </div>
                             {% if incident.severity == 'L' %}
                                 <span class="badge badge-secondary rounded-pill">Low severity</span>
