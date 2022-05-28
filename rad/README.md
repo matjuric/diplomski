@@ -47,6 +47,12 @@ python manage.py runserver
 login with created user credentials(superuser or created "radnik" user)
 ```
 
+## App screenshots
+![alt text](adding_new.png "Adding new Incident in system")
+![alt text](home_page.png "Home page")
+![alt text](details_page.png "Details page")
+![alt text](statistics.png "Statistcs page")
+
 ## timeliner.py
 - tool for drawing timelines out of formatted *.xlsx files
 - input: `*.xlsx` file, path to where you want to create `*.csv` file(created out of `*.xlsx` file)
