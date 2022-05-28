@@ -49,9 +49,12 @@ login with created user credentials(superuser or created "radnik" user)
 
 ## App screenshots
 ![alt text](adding_new.png "Adding new Incident in system")
+
 ![alt text](home_page.png "Home page")
+
 ![alt text](details_page.png "Details page")
-![alt text](statistics.png "Statistcs page")
+
+![alt text](statistics_page.png "Statistcs page")
 
 ## timeliner.py
 - tool for drawing timelines out of formatted *.xlsx files
