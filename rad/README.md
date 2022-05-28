@@ -54,7 +54,7 @@ login with created user credentials(superuser or created "radnik" user)
 
 ![alt text](details_page.png "Details page")
 
-![alt text](statistics_page.png "Statistcs page")
+![alt text](statistics_page.png "Statistics page")
 
 ## timeliner.py
 - tool for drawing timelines out of formatted *.xlsx files
